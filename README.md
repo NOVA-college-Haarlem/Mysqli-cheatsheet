@@ -24,7 +24,11 @@ if($mysqli->connect_errno ) {
 printf('Connected successfully.<br />');
 ```
 
-## INSERT Data Using Mysqli
+## SQL
+
+### INSERT Data Using Mysqli
+
+Add data to the database
 
 ```php
 
@@ -37,10 +41,11 @@ if ($conn->query($sql) === TRUE) {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }$conn->close();
 
-
 ```
 
-## SELECT Data Using Mysqli
+### SELECT Data Using Mysqli
+
+Select Data from the database.
 
 ```php
 
@@ -53,12 +58,27 @@ foreach ($rows as $row) {
 
 ```
 
-### SELECT with Prepared Statements
+## Mysqli And Prepared Statements
+
+You must __always__ use `prepared statements` for any SQL query that would contain a PHP variable. This will prevent SQL injections.
+
+#### SELECT Data with Prepared Statements
 
 ```php
-/* Non-prepared statement (NOT GOOD) */
-$mysqli->query("DROP TABLE IF EXISTS test");
-$mysqli->query("CREATE TABLE test(id INT, label TEXT)");
+$sql = "SELECT * FROM users WHERE id=?"; // SQL with parameters
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result(); // get the mysqli result
+$user = $result->fetch_assoc(); // fetch data
+```
+
+
+### INSERT INTO with Prepared Statements
+
+
+
+```php
 
 // prepare and bind
 $stmt = $conn->prepare("INSERT INTO MyGuests (firstname, lastname, email) VALUES (?, ?, ?)");
@@ -75,6 +95,5 @@ $lastname = "Moe";
 $email = "mary@example.com";
 $stmt->execute();
 
-
+echo "New records created successfully";
 ```
-
