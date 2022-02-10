@@ -35,11 +35,11 @@ Add data to the database
 $sql = "INSERT INTO students (student_name, student_email, student_city)
 VALUES ('John', 'john@example.com','los angeles')";
 
-if ($conn->query($sql) === TRUE) {
+if ($mysqli->query($sql) === TRUE) {
     echo "New record created successfully";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
-}$conn->close();
+}$mysqli->close();
 
 ```
 
@@ -66,7 +66,7 @@ You must __always__ use `prepared statements` for any SQL query that would conta
 
 ```php
 $sql = "SELECT * FROM users WHERE id=?"; // SQL with parameters
-$stmt = $conn->prepare($sql);
+$stmt = $mysqli->prepare($sql);
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result(); // get the mysqli result
@@ -81,7 +81,7 @@ $user = $result->fetch_assoc(); // fetch data
 ```php
 
 // prepare and bind
-$stmt = $conn->prepare("INSERT INTO MyGuests (firstname, lastname, email) VALUES (?, ?, ?)");
+$stmt = $mysqli->prepare("INSERT INTO MyGuests (firstname, lastname, email) VALUES (?, ?, ?)");
 $stmt->bind_param("sss", $firstname, $lastname, $email);
 
 // set parameters and execute
