@@ -53,7 +53,7 @@ $result = $mysqli->query("SELECT Name, CountryCode FROM City ORDER BY ID LIMIT 3
 
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 foreach ($rows as $row) {
-    echo $row["Name"] . " ".  $row["CountryCode"]);
+    echo $row["Name"] . " ".  $row["CountryCode"];
 }
 
 ```
