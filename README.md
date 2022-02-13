@@ -7,7 +7,7 @@ Using Mysqli Object Oriented Style
 ```php
 $dbhost = 'localhost';
 $dbuser = 'root';
-$dbpass = 'root@123';
+$dbpass = '';
 $dbname = 'TUTORIALS';
 $mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 ```
