@@ -8,7 +8,7 @@ Using Mysqli Object Oriented Style
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
-$dbname = 'TUTORIALS';
+$dbname = 'WHAT IS THE NAME OF YOUR DATABASE?';
 $mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 ```
 
@@ -32,8 +32,8 @@ Add data to the database
 
 ```php
 
-$sql = "INSERT INTO students (student_name, student_email, student_city)
-VALUES ('John', 'john@example.com','los angeles')";
+$sql = "INSERT INTO drivers (forename, surname, nationality)
+VALUES ('John', 'McTire','British')";
 
 if ($mysqli->query($sql) === TRUE) {
     echo "New record created successfully";
@@ -49,11 +49,11 @@ Select Data from the database.
 
 ```php
 
-$result = $mysqli->query("SELECT Name, CountryCode FROM City ORDER BY ID LIMIT 3");
+$result = $mysqli->query("SELECT forename, surname FROM drivers ORDER BY ID LIMIT 3");
 
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 foreach ($rows as $row) {
-    echo $row["Name"] . " ".  $row["CountryCode"];
+    echo $row["forename"] . " ".  $row["surname"];
 }
 
 ```
@@ -65,7 +65,7 @@ You must __always__ use `prepared statements` for any SQL query that would conta
 #### SELECT Data with Prepared Statements
 
 ```php
-$sql = "SELECT * FROM users WHERE id=?"; // SQL with parameters
+$sql = "SELECT * FROM drivers WHERE id=?"; // SQL with parameters
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("i", $id);
 $stmt->execute();
@@ -81,18 +81,18 @@ $user = $result->fetch_assoc(); // fetch data
 ```php
 
 // prepare and bind
-$stmt = $mysqli->prepare("INSERT INTO MyGuests (firstname, lastname, email) VALUES (?, ?, ?)");
-$stmt->bind_param("sss", $firstname, $lastname, $email);
+$stmt = $mysqli->prepare("INSERT INTO drivers (forename, surname, nationality) VALUES (?, ?, ?)");
+$stmt->bind_param("sss", $firstname, $lastname, $country);
 
 // set parameters and execute
 $firstname = "John";
 $lastname = "Doe";
-$email = "john@example.com";
+$country = "USA";
 $stmt->execute();
 
 $firstname = "Mary";
 $lastname = "Moe";
-$email = "mary@example.com";
+$email = "British";
 $stmt->execute();
 
 echo "New records created successfully";
