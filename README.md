@@ -56,13 +56,28 @@ foreach ($rows as $row) {
 
 ```
 
-## Data VERWIJDEREN
+## DATA VERWIJDEREN
 
 ```php
 
 $id = $_GET['id'];
 
 $sql = "DELETE FROM student WHERE id = $id";
+
+
+if ($mysqli->query($sql)) {
+    header("location: student_index.php");
+}
+
+```
+
+## DATA UPDATEN
+
+```php
+
+$id = $_GET['id'];
+
+$sql = "UPDATE student SET firstname, lastname, email WHERE id = $id";
 
 
 if ($mysqli->query($sql)) {
