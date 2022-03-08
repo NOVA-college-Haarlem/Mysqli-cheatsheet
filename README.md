@@ -25,7 +25,6 @@ printf('Connected successfully.<br />');
 ```
 
 ## DATA OPSLAAN
-### INSERT Data Using Mysqli
 
 Add data to the database
 
@@ -41,9 +40,8 @@ if ($mysqli->query($sql) === TRUE) {
 }$mysqli->close();
 
 ```
-## DATA OPHALEN
 
-### SELECT Data Using Mysqli
+## DATA OPHALEN
 
 Select Data from the database.
 
@@ -54,6 +52,21 @@ $result = $mysqli->query("SELECT forename, surname FROM drivers ORDER BY ID LIMI
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 foreach ($rows as $row) {
     echo $row["forename"] . " ".  $row["surname"];
+}
+
+```
+
+## Data VERWIJDEREN
+
+```php
+
+$id = $_GET['id'];
+
+$sql = "DELETE FROM student WHERE id = $id";
+
+
+if ($mysqli->query($sql)) {
+    header("location: student_index.php");
 }
 
 ```
