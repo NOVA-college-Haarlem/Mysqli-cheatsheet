@@ -1,8 +1,10 @@
+# Mysqli-sheetsheet
+
 ## Mysqli And Prepared Statements
 
 You must **always** use `prepared statements` for any SQL query that would contain a PHP variable. This will prevent SQL injections.
 
-#### SELECT Data with Prepared Statements
+### SELECT Data with Prepared Statements
 
 ```php
 $sql = "SELECT * FROM drivers WHERE id=?"; // SQL with parameters
