@@ -43,13 +43,25 @@ if ($mysqli->query($sql) === TRUE) {
 
 ## DATA OPHALEN
 
-Select Data from the database.
+Selecteer 1 RIJ uit de database.
+
+```php
+
+$result = $mysqli->query("SELECT forename, surname FROM users ORDER BY ID LIMIT 1");
+
+$user = $result->fetch_assoc(); //met fetch_assoc
+
+echo $user["forename"] . " ".  $user["surname"];
+```
+
+Selecteer MEERDERE RIJEN uit de database.
 
 ```php
 
 $result = $mysqli->query("SELECT forename, surname FROM drivers ORDER BY ID LIMIT 3");
 
-$rows = $result->fetch_all(MYSQLI_ASSOC);
+$rows = $result->fetch_all(MYSQLI_ASSOC); //met fetch_all()
+
 foreach ($rows as $row) {
     echo $row["forename"] . " ".  $row["surname"];
 }
