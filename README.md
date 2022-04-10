@@ -1,6 +1,6 @@
 # Mysqli-sheetsheet
 
-Using Mysqli Object Oriented Style
+Using Mysqli Procedural Style
 
 ## Database connectie
 
