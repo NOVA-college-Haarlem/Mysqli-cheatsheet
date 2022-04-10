@@ -5,39 +5,46 @@ Using Mysqli Object Oriented Style
 ## Database connectie
 
 ```php
-$dbhost = 'localhost';
-$dbuser = 'root';
-$dbpass = '';
-$dbname = 'WHAT IS THE NAME OF YOUR DATABASE?';
-$mysqli = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+// Database configuratie
+$host  = "localhost";
+$dbuser = "root";
+$dbpass = "";
+$dbname = "GFG";
+ 
+// Maak een  database connectie
+$conn = mysqli_connect($host, $dbuser, $dbpass, $dbname);
 ```
 
 ## Test Database connection
 
 ```php
-
-if($mysqli->connect_errno ) {
-    printf("Connect failed: %s<br />", $mysqli→connect_error);
-    exit();
+// Controleer de verbinding
+if(mysqli_connect_error())
+{
+ echo "Connection establishing failed!";
 }
-
-printf('Connected successfully.<br />');
+else
+{
+ echo "Connection established successfully.";
+}
 ```
 
 ## DATA OPSLAAN
 
-Add data to the database
+Add data into the database
 
 ```php
+
+require 'database.php';
 
 $sql = "INSERT INTO drivers (forename, surname, nationality)
 VALUES ('John', 'McTire','British')";
 
-if ($mysqli->query($sql) === TRUE) {
-    echo "New record created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}$mysqli->close();
+// Voer de INSERT INTO STATEMENT uit
+mysqli_query($conn, $sql);
+
+echo "Inserted successfully";
+mysqli_close($conn); // Sluit de database verbinding
 
 ```
 
@@ -46,38 +53,35 @@ if ($mysqli->query($sql) === TRUE) {
 Selecteer 1 RIJ uit de database.
 
 ```php
+require 'database.php';
 
-$result = $mysqli->query("SELECT forename, surname FROM users ORDER BY ID LIMIT 1");
-
-$user = $result->fetch_assoc(); //met fetch_assoc
-
-echo $user["forename"] . " ".  $user["surname"];
-```
-
-Selecteer MEERDERE RIJEN uit de database.
-
-```php
-
-$result = $mysqli->query("SELECT forename, surname FROM drivers ORDER BY ID LIMIT 3");
-
-$rows = $result->fetch_all(MYSQLI_ASSOC); //met fetch_all()
-
-foreach ($rows as $row) {
-    echo $row["forename"] . " ".  $row["surname"];
+$sql = "SELECT forename, surname FROM users ORDER BY ID LIMIT 1";
+ 
+if ( $result = mysqli_query($conn,$sql) )
+{
+  // haal een enkele db-rij op.
+  while ($row=mysqli_fetch_assoc($result))
+    {
+        echo " Naam Item :".$row["name"]." , ";
+        echo " Beschrijving : ".$row["description"];
+        echo  nl2br (" \n ");
+    }
+    // Haal het resultaat uit het geheugen
+  mysqli_free_result($result);
 }
-
+mysqli_close($conn);
 ```
 
 ## DATA VERWIJDEREN
 
 ```php
+require 'database.php';
 
 $id = $_GET['id'];
 
 $sql = "DELETE FROM student WHERE id = $id";
 
-
-if ($mysqli->query($sql)) {
+if (mysqli_query($conn,$sql)) {
     header("location: student_index.php");
 }
 
@@ -86,13 +90,13 @@ if ($mysqli->query($sql)) {
 ## DATA UPDATEN
 
 ```php
+require 'database.php';
 
 $id = $_GET['id'];
 
 $sql = "UPDATE student SET firstname, lastname, email WHERE id = $id";
 
-
-if ($mysqli->query($sql)) {
+if (mysqli_query($conn,$sql)) {
     header("location: student_index.php");
 }
 
