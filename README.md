@@ -1,6 +1,6 @@
 # Mysqli-sheetsheet
 
-Using Mysqli Procedural Style
+Using Mysqli **Procedural** Style
 
 ## Database connectie
 
@@ -50,7 +50,24 @@ mysqli_close($conn); // Sluit de database verbinding
 
 ## DATA OPHALEN
 
-Selecteer 1 RIJ uit de database.
+### Selecteer ALLE RIJEN uit de database.
+
+```php
+require 'database.php';
+
+$sql = "SELECT forename, surname FROM users";
+
+$result = mysqli_query($conn,$sql);
+
+$all_users = mysqli_fetch_all($result, MYSQL_ASSOC);
+?>
+
+<?php foreach($users as $user): ?>
+  <p><?php echo $user["voornaam"] ?></p>
+<?php endforeach; ?>
+```
+
+### Selecteer 1 RIJ uit de database
 
 ```php
 require 'database.php';
