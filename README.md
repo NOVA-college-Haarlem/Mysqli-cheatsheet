@@ -55,13 +55,20 @@ mysqli_close($conn); // Sluit de database verbinding
 ```php
 require 'database.php';
 
+//de sql query
 $sql = "SELECT forename, surname FROM users";
 
+//hier wordt de query uitgevoerd met de database
 $result = mysqli_query($conn,$sql);
 
+//hier wordt het resultaat ($result) omgezet in een multidimensionale associatieve array 
+// in dit voorbeeld staat $all_users maar dit mag voor bijvoorbeeld producten $all_products heten. Maar dit kies je zelf
 $all_users = mysqli_fetch_all($result, MYSQL_ASSOC);
 ?>
 
+//hier loop (iterate) je over alle waardes die gevonden zijn
+// je kunt zoals je zien paragraaf-tags gebruiken
+// maar je kunt ook andere HTML-tags gebruiken
 <?php foreach($users as $user): ?>
   <p><?php echo $user["voornaam"] ?></p>
 <?php endforeach; ?>
@@ -74,10 +81,10 @@ require 'database.php';
 
 $sql = "SELECT forename, surname FROM users ORDER BY ID LIMIT 1";
  
-if ( $result = mysqli_query($conn,$sql) )
+if ( $result = mysqli_query($conn,$sql) )//als er een resultaat is dan wordt dit code-blok uitgevoerd
 {
-  // haal een enkele db-rij op.
-  while ($row=mysqli_fetch_assoc($result))
+  //zolang een rij gevuld kan worden wordt de loop uitgevoerd
+  while ($row=mysqli_fetch_assoc($result)) 
     {
         echo " Naam Item :".$row["name"]." , ";
         echo " Beschrijving : ".$row["description"];
