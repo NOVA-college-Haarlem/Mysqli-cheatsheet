@@ -64,11 +64,12 @@ $result = mysqli_query($conn,$sql);
 //hier wordt het resultaat ($result) omgezet in een multidimensionale associatieve array 
 // in dit voorbeeld staat $all_users maar dit mag voor bijvoorbeeld producten $all_products heten. Maar dit kies je zelf
 $all_users = mysqli_fetch_all($result, MYSQL_ASSOC);
-?>
 
-//hier loop (iterate) je over alle waardes die gevonden zijn
+
+
+// hier loop (iterate) je over alle waardes die gevonden zijn
 // je kunt zoals je zien paragraaf-tags gebruiken
-// maar je kunt ook andere HTML-tags gebruiken
+// maar je kunt ook andere HTML-tags gebruiken ?>
 <?php foreach($users as $user): ?>
   <p><?php echo $user["voornaam"] ?></p>
 <?php endforeach; ?>
