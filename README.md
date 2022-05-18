@@ -68,7 +68,7 @@ $result = mysqli_query($conn,$sql);
  * voor bijvoorbeeld producten $all_products heten. 
  * Maar dit kies je zelf
  */
-$all_users = mysqli_fetch_all($result, MYSQL_ASSOC);
+$all_users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 
 
