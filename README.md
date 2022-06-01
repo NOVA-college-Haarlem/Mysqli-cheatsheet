@@ -75,7 +75,7 @@ $all_users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 /**
  * Hier loop (iterate) je over alle waardes die gevonden zijn.
  * Je kunt zoals je zien paragraaf-tags gebruiken
- * maar je kunt ook andere HTML-tags gebruiken 
+ * maar je kunt ook andere HTML-**tags** gebruiken 
  */ 
 ?>
 <?php foreach($users as $user): ?>
@@ -93,13 +93,12 @@ $sql = "SELECT forename, surname FROM users ORDER BY ID LIMIT 1";
 if ( $result = mysqli_query($conn,$sql) )//als er een resultaat is dan wordt dit code-blok uitgevoerd
 {
   //zolang een rij gevuld kan worden wordt de loop uitgevoerd
-  while ($row=mysqli_fetch_assoc($result)) 
-    {
-        echo " Naam Item :".$row["name"]." , ";
-        echo " Beschrijving : ".$row["description"];
-        echo  nl2br (" \n ");
-    }
-    // Haal het resultaat uit het geheugen
+$user = mysqli_fetch_assoc($result)
+
+echo $user['forename'];
+echo $user['surname'];
+  
+  // Haal het resultaat uit het geheugen
   mysqli_free_result($result);
 }
 mysqli_close($conn);
