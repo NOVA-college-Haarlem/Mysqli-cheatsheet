@@ -126,7 +126,7 @@ require 'database.php';
 
 $id = $_GET['id'];
 
-$sql = "UPDATE student SET firstname, lastname, email WHERE id = $id";
+$sql = "UPDATE student SET firstname = $firstname, lastname = $lastname, email = $email WHERE id = $id";
 
 if (mysqli_query($conn,$sql)) {
     header("location: student_index.php");
