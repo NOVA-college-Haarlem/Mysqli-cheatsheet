@@ -10,7 +10,7 @@ $host  = "localhost";
 $dbuser = "root";
 $dbpass = "";
 $dbname = "GFG";
- 
+
 // Maak een  database connectie
 $conn = mysqli_connect($host, $dbuser, $dbpass, $dbname);
 ```
@@ -62,10 +62,10 @@ $sql = "SELECT forename, surname FROM users";
 $result = mysqli_query($conn,$sql);
 
 /**
- * Hier wordt het resultaat ($result) omgezet 
- * in een *multidimensionale associatieve array 
- * in dit voorbeeld staat $all_users maar dit mag 
- * voor bijvoorbeeld producten $all_products heten. 
+ * Hier wordt het resultaat ($result) omgezet
+ * in een *multidimensionale associatieve array
+ * in dit voorbeeld staat $all_users maar dit mag
+ * voor bijvoorbeeld producten $all_products heten.
  * Maar dit kies je zelf
  */
 $all_users = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -75,8 +75,8 @@ $all_users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 /**
  * Hier loop (iterate) je over alle waardes die gevonden zijn.
  * Je kunt zoals je zien paragraaf-tags gebruiken
- * maar je kunt ook andere HTML-**tags** gebruiken 
- */ 
+ * maar je kunt ook andere HTML-**tags** gebruiken
+ */
 ?>
 <?php foreach($users as $user): ?>
   <p><?php echo $user["voornaam"] ?></p>
@@ -89,18 +89,17 @@ $all_users = mysqli_fetch_all($result, MYSQLI_ASSOC);
 require 'database.php';
 
 $sql = "SELECT forename, surname FROM users ORDER BY ID LIMIT 1";
- 
-if ( $result = mysqli_query($conn,$sql) )//als er een resultaat is dan wordt dit code-blok uitgevoerd
-{
+
+$result = mysqli_query($conn,$sql);
   //zolang een rij gevuld kan worden wordt de loop uitgevoerd
-$user = mysqli_fetch_assoc($result)
+$user = mysqli_fetch_assoc($result);
 
 echo $user['forename'];
 echo $user['surname'];
-  
-  // Haal het resultaat uit het geheugen
-  mysqli_free_result($result);
-}
+
+// Haal het resultaat uit het geheugen
+mysqli_free_result($result);
+
 mysqli_close($conn);
 ```
 
